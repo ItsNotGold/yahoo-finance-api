@@ -6,6 +6,10 @@ const app = express();
 app.use(cors());
 const yahooFinance = new YahooFinance();
 
+app.get("/", (req, res) => {
+  res.send("✅ Yahoo Finance API is live!");
+});
+
 // Get stock quote
 app.get("/quote/:symbol", async (req, res) => {
   try {
