@@ -1,5 +1,5 @@
 import express from "express";
-import yahooFinance from "yahoo-finance2";
+import YahooFinance from "yahoo-finance2";
 import cors from "cors";
 
 const app = express();
@@ -30,18 +30,17 @@ app.get("/search/:term", async (req, res) => {
   }
 });
 
-// Get chart data (historical)
+// Get historical price data
 app.get("/chart/:symbol", async (req, res) => {
   try {
-    const chart = await yahooFinance.chart(req.params.symbol, {
-      range: "1mo", // 1 month
-      interval: "1d"         // daily data
+    const result = await yahooFinance.chart(req.params.symbol, {
+      range: "1mo",        // 1 month of data
+      interval: "1d"       // daily prices
     });
-    res.json(chart);
+    res.json(result);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
 });
-
 
 app.listen(3000, () => console.log("✅ Yahoo Finance API running on port 3000"));
