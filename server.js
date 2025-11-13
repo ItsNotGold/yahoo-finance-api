@@ -4,6 +4,7 @@ import cors from "cors";
 
 const app = express();
 app.use(cors());
+const yahooFinance = new YahooFinance();
 
 // Get stock quote
 app.get("/quote/:symbol", async (req, res) => {
