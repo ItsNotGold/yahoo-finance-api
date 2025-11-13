@@ -1,14 +1,9 @@
 import express from "express";
-import YahooFinance from "yahoo-finance2";
+import yahooFinance from "yahoo-finance2"; // ✅ no "new" keyword
 import cors from "cors";
 
 const app = express();
 app.use(cors());
-const yahooFinance = new YahooFinance();
-
-app.get("/", (req, res) => {
-  res.send("✅ Yahoo Finance API is live!");
-});
 
 // Get stock quote
 app.get("/quote/:symbol", async (req, res) => {
@@ -34,8 +29,8 @@ app.get("/search/:term", async (req, res) => {
 app.get("/chart/:symbol", async (req, res) => {
   try {
     const result = await yahooFinance.chart(req.params.symbol, {
-      range: "1mo",        // 1 month of data
-      interval: "1d"       // daily prices
+      range: "1mo",   // 1 month
+      interval: "1d"  // daily
     });
     res.json(result);
   } catch (e) {
