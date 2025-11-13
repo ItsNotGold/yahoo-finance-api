@@ -30,17 +30,18 @@ app.get("/search/:term", async (req, res) => {
   }
 });
 
-// Get historical price data
+// Get chart data (historical)
 app.get("/chart/:symbol", async (req, res) => {
   try {
-    const result = await yahooFinance.chart(req.params.symbol, {
-      range: "1mo",   // 1 month
-      interval: "1d"  // daily
+    const chart = await yahooFinance.chart(req.params.symbol, {
+      range: "1mo", // 1 month
+      interval: "1d"         // daily data
     });
-    res.json(result);
+    res.json(chart);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
 });
+
 
 app.listen(3000, () => console.log("✅ Yahoo Finance API running on port 3000"));
