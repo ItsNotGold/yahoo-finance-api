@@ -1,9 +1,10 @@
 import express from "express";
-import * as yahooFinance from "yahoo-finance2";
+import yahooFinance from "yahoo-finance2";
 import cors from "cors";
 
 const app = express();
 app.use(cors());
+const yahooFinance = require("yahoo-finance2").default;
 
 app.get("/", (req, res) => {
   res.send("✅ Yahoo Finance API is live!");
